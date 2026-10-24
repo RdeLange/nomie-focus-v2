@@ -3,6 +3,7 @@
   import { timeLeft, phaseMs, clock, remainingShare, startTimer, pauseTimer, resumeTimer, nextPhase, focusMinutesOn, dayKey, type Timer, type Session, type Settings } from './timer';
   import { paletteFrom, type Palette } from './palette';
   import { offerTracker } from './tracker-offer';
+  import { onPrefsChange } from './prefs-live';
 
   const FOCUS_CHOICES = [15, 25, 50];
   const BREAK_CHOICES = [5, 10];
@@ -121,7 +122,8 @@
       addToMoreMenu: true,
       addToWidgets: true,
     });
-    plugin.onRegistered(async () => {
+    onPrefsChange(plugin, () => applyNomieValues());
+  plugin.onRegistered(async () => {
       applyNomieValues();
       await load();
     });
