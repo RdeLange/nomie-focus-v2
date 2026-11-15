@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { startSnapshots } from './snapshot';
   import { onMount } from 'svelte';
   import { timeLeft, phaseMs, clock, remainingShare, startTimer, pauseTimer, resumeTimer, nextPhase, focusMinutesOn, dayKey, type Timer, type Session, type Settings } from './timer';
   import { t, setLanguage, currentLanguage } from './i18n/index.svelte';
@@ -128,6 +129,7 @@
       addToMoreMenu: true,
       addToWidgets: true,
     });
+    startSnapshots(plugin);
     onPrefsChange(plugin, () => applyNomieValues());
   plugin.onRegistered(async () => {
       applyNomieValues();
